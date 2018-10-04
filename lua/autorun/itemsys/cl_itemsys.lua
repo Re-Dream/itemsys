@@ -46,70 +46,65 @@ net.Receive("rd_items:GUI", function()
 		for i,v in pairs(info.items) do
 			local itemTable = rd_items.GetItem(i)
 			if itemTable then
-			local it = iconlayout:Add("DPanel")
-			it:SetSize(380, 50)
+				local it = iconlayout:Add("DPanel")
+				it:SetSize(380, 50)
 
-			local ic = vgui.Create("SpawnIcon", it)
-			ic:SetSize(46, 46)
-			ic:SetPos(2, 2)
-			ic:SetToolTip("Click to buy item!")
-			ic:SetModel(itemTable.rd_model)
+				local ic = vgui.Create("SpawnIcon", it)
+				ic:SetSize(46, 46)
+				ic:SetPos(2, 2)
+				ic:SetToolTip("Click to buy item!")
+				ic:SetModel(itemTable.rd_model)
 
-			local itemname = vgui.Create("DLabel", it)
-			itemname:SetPos(50, 0)
-								itemname:SetSize(200, 20)
-			itemname:SetDark(1)
-			itemname:SetFont("Trebuchet18")
-			itemname:SetText(itemTable.rd_name .. " (¢" .. string.Comma(tostring(v)) .. ")")
+				local itemname = vgui.Create("DLabel", it)
+				itemname:SetPos(50, 0)
+									itemname:SetSize(200, 20)
+				itemname:SetDark(1)
+				itemname:SetFont("Trebuchet18")
+				itemname:SetText(itemTable.rd_name .. " (¢" .. string.Comma(tostring(v)) .. ")")
 
-			local itemdesc = vgui.Create("DLabel", it)
-			itemdesc:SetPos(50, 10)
-								itemdesc:SetSize(200, 20)
-			itemdesc:SetDark(1)
-			itemdesc:SetFont("Trebuchet18")
-			itemdesc:SetText(itemTable.rd_desc)
+				local itemdesc = vgui.Create("DLabel", it)
+				itemdesc:SetPos(50, 10)
+									itemdesc:SetSize(200, 20)
+				itemdesc:SetDark(1)
+				itemdesc:SetFont("Trebuchet18")
+				itemdesc:SetText(itemTable.rd_desc)
 
-			ic.DoClick = function(self)
-				--[[
-				net.Start("rd_items:BuyItem")
-				net.WriteString(i)
-				net.WriteEntity(ent)
-				net.SendToServer()
-				]]
-				local m = DermaMenu()
-				m:AddOption("Buy x1", function()
-					net.Start("rd_items:BuyItem")
-					net.WriteString(i)
-					net.WriteEntity(ent)
-					net.WriteInt(1, 32)
-					net.SendToServer()
-				end)
-				m:AddOption("Buy Multiple", function()
-					Derma_StringRequest(
-						"Shopkeeper",
-						"How many " .. itemTable.rd_name .. "s do you want to buy?",
-						"",
-						function(result)
-							local n = tonumber(result) or 5
-							Derma_Query(
-								"Are you sure you want to buy " .. tostring(n) .. "x " .. itemTable.rd_name .. " for ¢" .. string.Comma(tostring(n * v)) .. "?",
-								"Shopkeeper",
-								"Yes",
-								function()
-									net.Start("rd_items:BuyItem")
-									net.WriteString(i)
-									net.WriteEntity(ent)
-									net.WriteInt(n, 32)
-									net.SendToServer()
-								end,
-								"No",
-								function() end --Do nothing.
-							)
-						end,
-						function()end
-					)
-				end)
-				m:Open()
+				ic.DoClick = function(self)
+					local m = DermaMenu()
+					m:AddOption("Buy x1", function()
+						net.Start("rd_items:BuyItem")
+						net.WriteString(i)
+						net.WriteEntity(ent)
+						net.WriteInt(1, 32)
+						net.SendToServer()
+					end)
+					m:AddOption("Buy Multiple", function()
+						Derma_StringRequest(
+							"Shopkeeper",
+							"How many " .. itemTable.rd_name .. "s do you want to buy?",
+							"",
+							function(result)
+								local n = tonumber(result) or 5
+								Derma_Query(
+									"Are you sure you want to buy " .. tostring(n) .. "x " .. itemTable.rd_name .. " for ¢" .. string.Comma(tostring(n * v)) .. "?",
+									"Shopkeeper",
+									"Yes",
+									function()
+										net.Start("rd_items:BuyItem")
+										net.WriteString(i)
+										net.WriteEntity(ent)
+										net.WriteInt(n, 32)
+										net.SendToServer()
+									end,
+									"No",
+									function() end --Do nothing.
+								)
+							end,
+							function()end
+						)
+					end)
+					m:Open()
+				end
 			end
 		end
 	end
