@@ -16,6 +16,7 @@ if SERVER then
 	end
 	
 	includeCSLuaFile("itemsys/sh_itemsys.lua")
+	AddCSLuaFile("itemsys/cl_itemsys.lua")
 	includeCSLuaFile("itemsys/sh_coins.lua")
 	AddCSLuaFile("itemsys/cl_coinhud.lua")
 	include("itemsys/sv_npcspawner.lua")
@@ -30,6 +31,7 @@ if CLIENT then
 	include("itemsys/sh_coins.lua")
 	include("itemsys/sh_itemsys.lua")
 	include("itemsys/cl_coinhud.lua")
+	include("itemsys/cl_itemsys.lua")
 	local files, dirs = file.Find("autorun/itemsys/npcs/*", "LUA")
 	for i,v in pairs(files) do
 		include("autorun/itemsys/npcs/" .. v)
