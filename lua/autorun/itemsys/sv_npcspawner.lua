@@ -1,3 +1,4 @@
+rd_items.NPCShops = {}
 rd_items.NPCSpawns = {}
 rd_items.NPCSpawns["redream_waterlands_3"] = {}
 
