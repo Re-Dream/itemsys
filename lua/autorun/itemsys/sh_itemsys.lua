@@ -1,5 +1,6 @@
 rd_items = {}
 rd_items.Items = {}
+rd_items.NPCShops = {}
 
 --npc different genders
 rd_items.GenderTable = {
