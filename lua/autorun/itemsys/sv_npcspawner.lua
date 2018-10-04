@@ -1,3 +1,6 @@
+rd_items.NPCSpawns = {}
+rd_items.NPCSpawns["redream_waterlands_3"] = {}
+
 rd_items.CreateNPCs = function()
     local s = rd_items.NPCSpawns[game.GetMap()]
     if s then

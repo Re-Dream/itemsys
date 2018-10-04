@@ -94,9 +94,6 @@ function EMeta:GetGender()
 end
 
 if SERVER then
-	rd_items.NPCSpawns = {}
-	rd_items.NPCSpawns["redream_waterlands_3"] = {}
-
 	util.AddNetworkString("rd_items:BuyItem")
 	util.AddNetworkString("rd_items:RequestInventory")
 	util.AddNetworkString("rd_items:GUI")
