@@ -29,7 +29,9 @@ if SERVER then
 			net.Send(activator)
 			
 			--Smooth Lookup Animation
-			activator:LookAt(self, 0.25)
+			if activator.LookAt then
+				activator:LookAt(self, 0.25)
+			end
 			
 			--Say hi
 			local snds = rd_items.VoiceLines[self:GetGender()]
