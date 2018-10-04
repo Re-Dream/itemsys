@@ -2,7 +2,7 @@ local lerpCoins = 0
 local lastCoins = 0
 
 hook.Add("HUDPaint", "CoinsHud", function()
-    lerpCoins = Lerp(0.05, lerpCoins, LocalPlayer():GetCoins())
+    lerpCoins = Lerp(0.05, lerpCoins, tonumber(LocalPlayer():GetCoins())) --wat
 
     local hudColor
     if lastCoins < lerpCoins then
