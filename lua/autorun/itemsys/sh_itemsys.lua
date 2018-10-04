@@ -99,6 +99,7 @@ if SERVER then
 
 	util.AddNetworkString("rd_items:BuyItem")
 	util.AddNetworkString("rd_items:RequestInventory")
+	util.AddNetworkString("rd_items:GUI")
 
 	hook.Add("PlayerInitialSpawn", "rd_items:PlayerInitialSpawn", function(ply)
 		ply.Inventory = {}
