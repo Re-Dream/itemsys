@@ -1,4 +1,5 @@
 --use pdata instead of netdata if used on different than redream
+
 local PLAYER = FindMetaTable("Player")
 if not PLAYER.GetNetData then
 	PLAYER.GetNetData = PLAYER.GetPData
@@ -14,14 +15,21 @@ if SERVER then
 		AddCSLuaFile(x)
 	end
 	
-	includeCSLuaFile("itemsys/sh_coins.lua")
 	includeCSLuaFile("itemsys/sh_itemsys.lua")
+	includeCSLuaFile("itemsys/sh_coins.lua")
 	include("itemsys/sv_npcspawner.lua")
-	
+	local files, dirs = file.Find("autorun/itemsys/npcs/*", "LUA")
+	for i,v in pairs(files) do
+		include("autorun/itemsys/npcs/" .. v)
+	end
 	--todo: init all npcs
 end
 
 if CLIENT then
 	include("itemsys/sh_coins.lua")
 	include("itemsys/sh_itemsys.lua")
+	local files, dirs = file.Find("autorun/itemsys/npcs/*", "LUA")
+	for i,v in pairs(files) do
+		include("autorun/itemsys/npcs/" .. v)
+	end
 end
