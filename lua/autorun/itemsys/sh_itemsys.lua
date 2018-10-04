@@ -117,7 +117,8 @@ if SERVER then
 			return
 		end
 		
-		if ply:GetCoins() >= price * amnt then
+		local coins = tonumber(ply:GetCoins()) --wat
+		if coins >= price * amnt then
 			rd_items.Msg("successful purchase " .. tostring(ply) .. " " .. tostring(amnt) .. "x " .. item)
 
 			if not ply.Inventory then
